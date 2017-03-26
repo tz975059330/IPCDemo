@@ -1,5 +1,7 @@
+//Library工程必须加载此插。加载了Android插件就不要加载Java插件了。
+//因为An动容地插件本身就是扩展了Java插件
 apply plugin: 'com.android.application'
-
+//Android的编译，增加的一种新类型的ScriptBlock  android
 android {
     compileSdkVersion 24
     buildToolsVersion "25.0.2"
@@ -11,25 +13,36 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    //配置源码路径。Java插件引入的
     sourceSets {
+
         main {
+            //这是一个函数，设置manifest.srcFile
             manifest.srcFile 'src/main/AndroidManifest.xml'
+            //设置Java路径
             java.srcDirs = ['src/main/java', 'src/main/aidl']
+            //设置resources路径
             resources.srcDirs = ['src/main/java', 'src/main/aidl']
+            //设置aidl路径
             aidl.srcDirs = ['src/main/aidl']
             res.srcDirs = ['src/main/res']
             assets.srcDirs = ['src/main/assets']
         }
     }
     buildTypes {
+        //混淆模块
         release {
+            //是否进行混淆
             minifyEnabled false
+            //混淆文件位置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
-
+//配置依赖关系
 dependencies {
+    //compile表示编译和运行时都需要的包     fileTree是一个函数
+    //dir：‘libs’ 表示搜索的目录名称是libs，  include：['*.jar']表示搜索目录下满足*.jar名字的jar包都作为依赖的jar包
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
