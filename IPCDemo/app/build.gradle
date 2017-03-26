@@ -1,7 +1,7 @@
-//Library工程必须加载此插。加载了Android插件就不要加载Java插件了。
-//因为An动容地插件本身就是扩展了Java插件
+//Library工程必须加载此插件。加载了Android插件就不要加载Java插件了。
+//因为Android地插件本身就是扩展了Java插件
 apply plugin: 'com.android.application'
-//Android的编译，增加的一种新类型的ScriptBlock  android
+//Android的编译增加的一种新类型的ScriptBlock  android
 android {
     compileSdkVersion 24
     buildToolsVersion "25.0.2"
